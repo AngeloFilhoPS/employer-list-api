@@ -1,15 +1,23 @@
 package com.angelo.marcio.employerList.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Tech {
+@Entity
+public class Tech implements Serializable {
 
+
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID uuid;
     private String name;
     private String description;
+    @OneToMany(mappedBy = "mainTech")
     private List<Employer> listOfEmployer = new ArrayList<>();
 
     public Tech(){
